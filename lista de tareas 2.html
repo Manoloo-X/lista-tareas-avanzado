@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>🚀 Sistema de Gestión de Tareas</title>
+    <link rel="stylesheet" href="styles.css" />
+</head>
+
+<body>
+    <div class="container">
+
+        <header class="app-header">
+            <h1>🚀 Sistema de Gestión de Tareas</h1>
+            <nav class="tabs" role="tablist" aria-label="Cambiar de vista">
+                <button class="tab active" data-view="lista" role="tab" aria-selected="true">📋 Lista</button>
+                <button class="tab" data-view="calendario" role="tab" aria-selected="false">📅 Calendario</button>
+                <button class="tab" data-view="estadisticas" role="tab" aria-selected="false">📊 Estadísticas</button>
+            </nav>
+        </header>
+
+        <!-- Formulario de alta -->
+        <section class="panel formulario-avanzado" aria-labelledby="titulo-form">
+            <h2 id="titulo-form" class="sr-only">Nueva tarea</h2>
+            <div class="form-grid">
+                <input type="text" id="input-tarea" placeholder="¿Qué necesitas hacer?" autocomplete="off" />
+                <select id="input-prioridad" aria-label="Prioridad">
+                    <option value="baja">Baja</option>
+                    <option value="media" selected>Media</option>
+                    <option value="alta">Alta</option>
+                </select>
+                <select id="input-categoria" aria-label="Categoría">
+                    <option value="personal">Personal</option>
+                    <option value="trabajo">Trabajo</option>
+                    <option value="estudios">Estudios</option>
+                    <option value="hogar">Hogar</option>
+                </select>
+                <input type="date" id="input-fecha" aria-label="Fecha de vencimiento" />
+                <input type="text" id="input-etiquetas" placeholder="Etiquetas (separadas por coma)" />
+                <button id="btn-agregar" class="btn-primary">➕ Agregar</button>
+            </div>
+        </section>
+
+        <!-- Filtros -->
+        <section class="panel filtros" aria-labelledby="titulo-filtros">
+            <h2 id="titulo-filtros" class="sr-only">Filtros</h2>
+            <div class="filtros-grid">
+                <select id="filtro-estado" aria-label="Estado">
+                    <option value="todas">Todas</option>
+                    <option value="pendientes" selected>Pendientes</option>
+                    <option value="completadas">Completadas</option>
+                </select>
+                <select id="filtro-prioridad" aria-label="Prioridad">
+                    <option value="todas">Todas</option>
+                    <option value="alta">Alta</option>
+                    <option value="media">Media</option>
+                    <option value="baja">Baja</option>
+                </select>
+                <select id="filtro-categoria" aria-label="Categoría">
+                    <option value="todas">Todas</option>
+                    <option value="personal">Personal</option>
+                    <option value="trabajo">Trabajo</option>
+                    <option value="estudios">Estudios</option>
+                    <option value="hogar">Hogar</option>
+                </select>
+                <input type="search" id="filtro-busqueda" placeholder="Buscar por texto o #etiqueta" />
+            </div>
+        </section>
+
+        <!-- Vista: Lista -->
+        <section id="vista-lista" class="vista active" aria-labelledby="titulo-lista">
+            <h2 id="titulo-lista" class="sr-only">Lista de tareas</h2>
+            <div id="lista-tareas" class="lista-tareas"></div>
+        </section>
+
+        <!-- Vista: Calendario -->
+        <section id="vista-calendario" class="vista" aria-labelledby="titulo-calendario">
+            <div class="cal-header">
+                <button id="cal-prev" aria-label="Mes anterior">◀</button>
+                <h2 id="titulo-calendario" class="cal-title"></h2>
+                <button id="cal-next" aria-label="Mes siguiente">▶</button>
+            </div>
+            <div id="calendario" class="calendario"></div>
+        </section>
+
+        <!-- Vista: Estadísticas -->
+        <section id="vista-estadisticas" class="vista" aria-labelledby="titulo-estadisticas">
+            <h2 id="titulo-estadisticas" class="sr-only">Estadísticas</h2>
+            <div id="estadisticas" class="estadisticas"></div>
+        </section>
+    </div>
+
+    <!-- Modal de edición -->
+    <div id="modal-editar" class="modal hidden" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+        <div class="modal-content">
+            <header class="modal-header">
+                <h3 id="modal-title">Editar tarea</h3>
+                <button class="modal-close" aria-label="Cerrar">✖</button>
+            </header>
+            <div class="modal-body">
+                <label>Texto
+                    <input type="text" id="edit-texto" />
+                </label>
+                <label>Prioridad
+                    <select id="edit-prioridad">
+                        <option value="baja">Baja</option>
+                        <option value="media">Media</option>
+                        <option value="alta">Alta</option>
+                    </select>
+                </label>
+                <label>Categoría
+                    <select id="edit-categoria">
+                        <option value="personal">Personal</option>
+                        <option value="trabajo">Trabajo</option>
+                        <option value="estudios">Estudios</option>
+                        <option value="hogar">Hogar</option>
+                    </select>
+                </label>
+                <label>Fecha de vencimiento
+                    <input type="date" id="edit-fecha" />
+                </label>
+                <label>Etiquetas (coma)
+                    <input type="text" id="edit-etiquetas" />
+                </label>
+                <label>Notas
+                    <textarea id="edit-notas" rows="3" placeholder="Notas internas..."></textarea>
+                </label>
+            </div>
+            <footer class="modal-footer">
+                <button class="btn-secondary modal-close">Cancelar</button>
+                <button class="btn-primary modal-save">Guardar</button>
+            </footer>
+        </div>
+    </div>
+
+    <script src="app.js" defer></script>
+</body>
+
+</html>
